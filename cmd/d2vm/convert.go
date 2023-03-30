@@ -19,7 +19,6 @@ import (
 	"os"
 	"path/filepath"
 	"runtime"
-	"strings"
 
 	"github.com/c2h5oh/datasize"
 	"github.com/sirupsen/logrus"
@@ -56,17 +55,9 @@ var (
 				splitBoot = true
 			}
 			img := args[0]
-			tag := "latest"
-			if parts := strings.Split(img, ":"); len(parts) > 1 {
-				img, tag = parts[0], parts[1]
-			}
-			img = fmt.Sprintf("%s:%s", img, tag)
 			size, err := parseSize(size)
 			if err != nil {
 				return err
-			}
-			if push && tag == "" {
-				return fmt.Errorf("tag is required when pushing container disk image")
 			}
 			if _, err := os.Stat(output); err == nil || !os.IsNotExist(err) {
 				if !force {

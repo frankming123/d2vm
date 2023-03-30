@@ -87,7 +87,7 @@ install: docker-build
 
 .build:
 	@go generate ./...
-	@go build -o d2vm -ldflags "-s -w -X '$(MODULE).Version=$(VERSION)' -X '$(MODULE).BuildDate=$(shell date)'" ./cmd/d2vm
+	@CGO_ENABLED=0 go build -o d2vm -ldflags "-s -w -X '$(MODULE).Version=$(VERSION)' -X '$(MODULE).BuildDate=$(shell date)'" ./cmd/d2vm
 
 .PHONY: build-snapshot
 build-snapshot: bin

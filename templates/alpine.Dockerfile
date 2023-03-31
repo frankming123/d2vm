@@ -2,6 +2,10 @@ FROM {{ .Image }}
 
 USER root
 
+{{ if .MirrorRepo }}
+RUN sed -i 's|https://dl-cdn.alpinelinux.org|{{ .MirrorRepo }}|g' /etc/apk/repositories
+{{ end }}
+
 RUN apk update --no-cache && \
     apk add \
       util-linux \

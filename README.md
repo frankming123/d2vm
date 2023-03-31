@@ -163,6 +163,7 @@ Flags:
   -h, --help                       help for convert
       --keep-cache                 Keep the images after the build
       --luks-password string       Password to use for the LUKS encrypted root partition. If not set, the root partition will not be encrypted
+      --mirror-repo string         The repo mirror url of package manager such as yum, apt, apk. If not set, official repo url will be used.
       --network-manager string     Network manager to use for the image: none, netplan, ifupdown
   -o, --output string              The output image, the extension determine the image format, raw will be used if none. Supported formats: qcow2 qed raw vdi vhd vmdk (default "disk0.qcow2")
   -p, --password string            Optional root user password

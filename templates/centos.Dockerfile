@@ -2,8 +2,10 @@ FROM {{ .Image }}
 
 USER root
 
+{{ if .MirrorRepo }}
 RUN sed -i 's/mirrorlist/#mirrorlist/g' /etc/yum.repos.d/CentOS-* && \
-    sed -i 's|#baseurl=http://mirror.centos.org|baseurl=http://vault.centos.org|g' /etc/yum.repos.d/CentOS-*
+    sed -i 's|#baseurl=http://mirror.centos.org|baseurl={{ .MirrorRepo }}|g' /etc/yum.repos.d/CentOS-*
+{{ end }}
 
 RUN yum update -y
 

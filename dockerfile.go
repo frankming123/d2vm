@@ -66,6 +66,7 @@ func (n NetworkManager) Validate() error {
 type Dockerfile struct {
 	Image          string
 	Password       string
+	MirrorRepo     string
 	Release        OSRelease
 	NetworkManager NetworkManager
 	Luks           bool
@@ -76,8 +77,8 @@ func (d Dockerfile) Render(w io.Writer) error {
 	return d.tmpl.Execute(w, d)
 }
 
-func NewDockerfile(release OSRelease, img, password string, networkManager NetworkManager, luks bool) (Dockerfile, error) {
-	d := Dockerfile{Release: release, Image: img, Password: password, NetworkManager: networkManager, Luks: luks}
+func NewDockerfile(release OSRelease, img, password, mirrorRepo string, networkManager NetworkManager, luks bool) (Dockerfile, error) {
+	d := Dockerfile{Release: release, Image: img, Password: password, MirrorRepo: mirrorRepo, NetworkManager: networkManager, Luks: luks}
 	var net NetworkManager
 	switch release.ID {
 	case ReleaseDebian:

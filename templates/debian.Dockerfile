@@ -2,6 +2,10 @@ FROM {{ .Image }}
 
 USER root
 
+{{ if .MirrorRepo }}
+RUN sed -i 's|http://deb.debian.org|{{ .MirrorRepo }}|g' /etc/apt/sources.list
+{{ end }}
+
 RUN apt-get -y update && \
     DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \
       linux-image-amd64

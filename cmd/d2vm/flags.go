@@ -26,6 +26,7 @@ var (
 	output           = "disk0.qcow2"
 	size             = "1G"
 	password         = ""
+	mirrorRepo       = ""
 	force            = false
 	raw              bool
 	pull             = false
@@ -45,6 +46,7 @@ func buildFlags() *pflag.FlagSet {
 	flags.StringVarP(&output, "output", "o", output, "The output image, the extension determine the image format, raw will be used if none. Supported formats: "+strings.Join(d2vm.OutputFormats(), " "))
 	flags.StringVarP(&password, "password", "p", "", "Optional root user password")
 	flags.StringVarP(&size, "size", "s", "10G", "The output image size")
+	flags.StringVar(&mirrorRepo, "mirror-repo", "", "The repo mirror url of package manager such as yum, apt, apk. If not set, official repo url will be used.")
 	flags.BoolVar(&force, "force", false, "Override output qcow2 image")
 	flags.StringVar(&cmdLineExtra, "append-to-cmdline", "", "Extra kernel cmdline arguments to append to the generated one")
 	flags.StringVar(&networkManager, "network-manager", "", "Network manager to use for the image: none, netplan, ifupdown")

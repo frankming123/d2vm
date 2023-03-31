@@ -19,6 +19,7 @@ type ConvertOption func(o *convertOptions)
 type convertOptions struct {
 	size           uint64
 	password       string
+	mirrorRepo     string
 	output         string
 	cmdLineExtra   string
 	networkManager NetworkManager
@@ -89,5 +90,11 @@ func WithLuksPassword(password string) ConvertOption {
 func WithKeepCache(b bool) ConvertOption {
 	return func(o *convertOptions) {
 		o.keepCache = b
+	}
+}
+
+func WithMirrorRepo(mirrorRepo string) ConvertOption {
+	return func(o *convertOptions) {
+		o.mirrorRepo = mirrorRepo
 	}
 }

@@ -2,6 +2,10 @@ FROM {{ .Image }}
 
 USER root
 
+{{ if .MirrorRepo }}
+RUN sed -i 's|http://archive.ubuntu.com|{{ .MirrorRepo }}|g' /etc/apt/sources.list
+{{ end }}
+
 RUN apt-get update -y && \
   DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \
   linux-image-virtual \

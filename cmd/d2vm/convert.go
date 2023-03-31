@@ -94,6 +94,7 @@ var (
 				d2vm.WithBootSize(bootSize),
 				d2vm.WithLuksPassword(luksPassword),
 				d2vm.WithKeepCache(keepCache),
+				d2vm.WithMirrorRepo(mirrorRepo),
 			); err != nil {
 				return err
 			}

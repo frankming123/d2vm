@@ -2,6 +2,10 @@ FROM {{ .Image }}
 
 USER root
 
+{{ if .MirrorRepo }}
+RUN sed -i 's|http://repo.openeuler.org|{{ .MirrorRepo }}|g' /etc/yum.repos.d/*.repo
+{{ end }}
+
 RUN dnf update -y && \
     dnf install -y kernel systemd NetworkManager e2fsprogs sudo passwd openssh-server openssh-clients \
     lvm2 tree bash-completion iputils iproute hostname && \

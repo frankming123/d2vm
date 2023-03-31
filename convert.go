@@ -51,7 +51,7 @@ func Convert(ctx context.Context, img string, opts ...ConvertOption) error {
 	}
 
 	if !o.raw {
-		d, err := NewDockerfile(r, img, o.password, o.networkManager, o.luksPassword != "")
+		d, err := NewDockerfile(r, img, o.password, o.mirrorRepo, o.networkManager, o.luksPassword != "")
 		if err != nil {
 			return err
 		}

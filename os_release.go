@@ -30,12 +30,13 @@ import (
 )
 
 const (
-	ReleaseUbuntu Release = "ubuntu"
-	ReleaseDebian Release = "debian"
-	ReleaseAlpine Release = "alpine"
-	ReleaseCentOS Release = "centos"
-	ReleaseRHEL   Release = "rhel"
-	ReleaseKali   Release = "kali"
+	ReleaseUbuntu    Release = "ubuntu"
+	ReleaseDebian    Release = "debian"
+	ReleaseAlpine    Release = "alpine"
+	ReleaseCentOS    Release = "centos"
+	ReleaseRHEL      Release = "rhel"
+	ReleaseKali      Release = "kali"
+	ReleaseOpenEuler Release = "openeuler"
 )
 
 type Release string
@@ -51,6 +52,8 @@ func (r Release) Supported() bool {
 	case ReleaseAlpine:
 		return true
 	case ReleaseCentOS:
+		return true
+	case ReleaseOpenEuler:
 		return true
 	case ReleaseRHEL:
 		return false
@@ -82,6 +85,8 @@ func (r OSRelease) SupportsLUKS() bool {
 		// TODO: check version
 		return true
 	case ReleaseCentOS:
+		return true
+	case ReleaseOpenEuler:
 		return true
 	case ReleaseAlpine:
 		return true

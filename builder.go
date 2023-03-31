@@ -103,6 +103,8 @@ func sysconfig(osRelease OSRelease) (string, error) {
 		return syslinuxCfgAlpine, nil
 	case ReleaseCentOS:
 		return syslinuxCfgCentOS, nil
+	case ReleaseOpenEuler:
+		return syslinuxCfgCentOS, nil
 	default:
 		return "", fmt.Errorf("%s: distribution not supported", osRelease.ID)
 	}

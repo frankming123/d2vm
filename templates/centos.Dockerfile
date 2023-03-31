@@ -7,15 +7,10 @@ RUN sed -i 's/mirrorlist/#mirrorlist/g' /etc/yum.repos.d/CentOS-* && \
     sed -i 's|#baseurl=http://mirror.centos.org|baseurl={{ .MirrorRepo }}|g' /etc/yum.repos.d/CentOS-*
 {{ end }}
 
-RUN yum update -y
+RUN yum update -y && yum install -y kernel systemd NetworkManager e2fsprogs sudo && \
+    yum clean all && rm -rf /var/cache/yum /var/lib/yum
 
-RUN yum install -y \
-    kernel \
-    systemd \
-    NetworkManager \
-    e2fsprogs \
-    sudo && \
-    systemctl enable NetworkManager && \
+RUN systemctl enable NetworkManager && \
     systemctl unmask systemd-remount-fs.service && \
     systemctl unmask getty.target && \
     cd /boot && \
